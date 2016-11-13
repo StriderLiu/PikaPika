@@ -10,15 +10,16 @@ import play.api.libs.json._
 import scala.io.Source._
 
 object Pokemons extends App{
+  // Define sc object
   val conf = new SparkConf().
     setMaster("local").
     setAppName("Pokemons")
   val sc = new SparkContext(conf)
-
+  // Initial RDD
   val pokeText = sc.textFile("/Users/vincentliu/Desktop/Courses_2016Fall/CSYE7200_Scala/Final Project/300k.csv")
 
   case class Coordinate(lat: Double, lng: Double)
-
+  // Filter pokemon RDD belong to US
   val usPokes = pokeText.map(_.split(",")).filter(s =>
     s(21) == "New_York" ||
     s(21) == "Los_Angeles" ||
@@ -30,19 +31,21 @@ object Pokemons extends App{
     s(21) == "Boise" ||
     s(21) == "Louisville" ||
     s(21) == "Monrovia")
-
+  // Due to multiple times of usage, persist this RDD
   usPokes.persist(StorageLevel.MEMORY_AND_DISK)
-
+  // Build the coordinates RDD.
   val usCoordinates = usPokes.map(
     s => Coordinate(s(1).toDouble, s(2).toDouble)
   )
   usCoordinates.persist(StorageLevel.MEMORY_AND_DISK)
-  println(usCoordinates.count)
+  //println(usCoordinates.count)
 
+  // Due to Google API request limit, need to split the RDD by 2500 as a subset
   val part1 = sc.parallelize(usCoordinates take 2500)
 
-  def json(url: String): JsValue = Json.parse(fromURL(url).mkString)
+  //def json(url: String): JsValue = Json.parse(fromURL(url).mkString)
 
+  // Test on the first record and see what we can get through the reverse geocoding
   val coord = part1.take(1)
   val url_1 = s"https://maps.googleapis.com/maps/api/geocode/json?latlng=${coord(0).lat},${coord(0).lng}&key=AIzaSyCdGD2_7T1Bsi9dtp_dhgmL5p4gKTXrmUU"
   val req = url(url_1)
