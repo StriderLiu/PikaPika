@@ -25,6 +25,8 @@ Predict'em All from Kaggle: https://www.kaggle.com/semioniy/predictemall
 1. [Done]Filter data of U.S. cities: New_York, Los_Angeles, Chicago, Phoenix, Denver, Indianapolis, Detroit, Boise, Louisville, Monrovia
 
 2. [Processing]Request zip code using Google Map reverse geoencoding api ((latitude, longitude) -> ZIP)
+- Experiment on only one request but still have trouble with getting the correct json result.
+- I use dispatch library to deal with the HTTP request and it seems like the package works fine in the "DispatchTest" file.
 
 3. Add Zip as output feature and remove coordinates columns
 
@@ -33,5 +35,3 @@ Predict'em All from Kaggle: https://www.kaggle.com/semioniy/predictemall
 5. Logistic Regression
 
 6. Dimension reduction
-
-7. Transplant code to IDE
