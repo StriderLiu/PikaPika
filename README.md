@@ -25,7 +25,9 @@ Predict'em All from Kaggle: https://www.kaggle.com/semioniy/predictemall
 1. [Done]Filter data of U.S. cities: New_York, Los_Angeles, Chicago, Phoenix, Denver, Indianapolis, Detroit, Boise, Louisville, Monrovia
 
 2. [Processing]Request zip code using Google Map reverse geoencoding api ((latitude, longitude) -> ZIP)
+
      (1)Need about 48 google keys
+     
      (2)Store every 2500 zip codes in a file, then merge them into one 
 
 3. Add Zip as output feature and remove coordinates columns (need to use SparkSQL)
