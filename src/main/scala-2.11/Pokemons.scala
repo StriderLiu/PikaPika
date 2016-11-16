@@ -3,11 +3,10 @@
   */
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.{SparkConf, SparkContext}
-
 import play.api.libs.json._
-
 import scala.io.Source._
 import scala.util.matching._
+import java.io._
 //import java.net._
 //import dispatch.Defaults._
 //import dispatch._
@@ -22,7 +21,7 @@ object Pokemons extends App{
     setAppName("Pokemons")
   val sc = new SparkContext(conf)
   // Initial RDD
-  val pokeText = sc.textFile("/Users/vincentliu/Desktop/Courses_2016Fall/CSYE7200_Scala/Final Project/300k.csv")
+  val pokeText = sc.textFile("/Users/vincentliu/Documents/Scala_Workspace/PikaPika/DataFiles/300k.csv")
 
   case class Coordinate(lat: Double, lng: Double)
   // Filter pokemon RDD belong to US
@@ -59,15 +58,18 @@ object Pokemons extends App{
   } yield zip
 
   val pattern = """(.*)\,\s([A-Z]*\s\d{5})\,\s(USA)""".r
+  val zipFile = new FileWriter("/Users/vincentliu/Documents/Scala_Workspace/PikaPika/DataFiles/ZipCodes.txt", true)
 
   // Due to Google API request limit, need to split the RDD by 2500 as a subset
   val part1 = usCoordinates take 2500 // Array[Coordinate]
-  val key1 = "AIzaSyDXxUKKAooWrPYxk09yudhZCKVw5zTWYlw"
+  val key1 = "AIzaSyAwEUgLS60ASa95pEpWdoxcpln5DtSDAko"
+  val writer = new BufferedWriter(zipFile)
 
   val zips_1 = getZipCodes(part1, key1, pattern)
+  for (zip <- zips_1) writer.write(zip + "\n")
+  writer.close // flush the stream data into file
+
 //  val zips_1_RDD = sc.parallelize(zips_1)
-
-
 
 //  val zips_1 = for {
 //    coord <- part1
