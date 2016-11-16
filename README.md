@@ -30,7 +30,7 @@ Predict'em All from Kaggle: https://www.kaggle.com/semioniy/predictemall
      
      (2)Store every 2500 zip codes in a file, then merge them into one .
 
-3. Add Zip as output feature and remove coordinates columns (need to use SparkSQL)
+3. Add Zip as output feature and remove coordinates columns (use SparkSQL)
 
 4. Feature Adjustments (Generate a cleansing-complete csv file)
 
