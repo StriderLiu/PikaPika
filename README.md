@@ -26,11 +26,11 @@ Predict'em All from Kaggle: https://www.kaggle.com/semioniy/predictemall
 
 2. [Processing]Request zip code using Google Map reverse geoencoding api ((latitude, longitude) -> ZIP)
 
-     (1)Experiment on only one request but still have trouble with getting the correct json result.
+     (1)Need about 48 google keys.
      
-     (2)I use dispatch library to deal with the HTTP request and it seems like the package works fine in the "DispatchTest" file.
+     (2)Store every 2500 zip codes in a file, then merge them into one .
 
-3. Add Zip as output feature and remove coordinates columns
+3. Add Zip as output feature and remove coordinates columns (use SparkSQL)
 
 4. Feature Adjustments (Generate a cleansing-complete csv file)
 
