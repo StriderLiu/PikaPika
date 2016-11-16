@@ -7,12 +7,6 @@ import play.api.libs.json._
 import scala.io.Source._
 import scala.util.matching._
 import java.io._
-//import java.net._
-//import dispatch.Defaults._
-//import dispatch._
-//import scala.concurrent._
-//import scala.concurrent.duration._
-//import scala.util.{Failure, Success}
 
 object Pokemons extends App{
   // Define sc object
