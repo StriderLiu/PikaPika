@@ -6,12 +6,13 @@
 import java.net._
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.{SparkConf, SparkContext}
-import scala.concurrent._
-import scala.concurrent.duration._
+//import scala.concurrent._
+//import scala.concurrent.duration._
 import play.api.libs.json._
 
 import scala.io.Source._
-import scala.util.{Failure, Success}
+import scala.util.matching._
+//import scala.util.{Failure, Success}
 
 object Pokemons extends App{
   // Define sc object
@@ -65,10 +66,12 @@ object Pokemons extends App{
 
 //  println(result)
 //  val zip_1 = (result \ "results" \\ "formatted_address")(0).as[String].split(",")(2).split(" ")(2)
-  val adds = (result \ "results" \\ "formatted_address")
-  val pattern = "\\d{5}\\,\\s(USA)".r
-  val zip_1 = for (pattern(zip, _) <- adds) zip
-  println(zip_1)
+  val adds = (result \ "results" \\ "formatted_address").toList.map(_.as[String])
+  // Regex matching
+  val pattern = """(.*)\,\s([A-Z]*\s\d{5})\,\s(USA)""".r
+  val goodPart = for (pattern(_, state_zip, _) <- adds) yield state_zip
+  val zip = goodPart(0).split(" ")(1)
+  println(zip)
 
 //  val zips_1 = for {
 //    coord <- part1
