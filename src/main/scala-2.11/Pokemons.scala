@@ -67,7 +67,7 @@ object Pokemons extends App{
 //  val zip_1 = (result \ "results" \\ "formatted_address")(0).as[String].split(",")(2).split(" ")(2)
   val adds = (result \ "results" \\ "formatted_address")
   val pattern = "\\d{5}\\,\\s(USA)".r
-  val zip_1 = for (pattern(zip, country) <- adds) zip
+  val zip_1 = for (pattern(zip, _) <- adds) zip
   println(zip_1)
 
 //  val zips_1 = for {
