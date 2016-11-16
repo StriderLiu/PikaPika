@@ -1,17 +1,18 @@
 /**
   * Created by vincentliu on 12/11/2016.
   */
-//import dispatch.Defaults._
-//import dispatch._
-import java.net._
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.{SparkConf, SparkContext}
-//import scala.concurrent._
-//import scala.concurrent.duration._
+
 import play.api.libs.json._
 
 import scala.io.Source._
 import scala.util.matching._
+//import java.net._
+//import dispatch.Defaults._
+//import dispatch._
+//import scala.concurrent._
+//import scala.concurrent.duration._
 //import scala.util.{Failure, Success}
 
 object Pokemons extends App{
@@ -45,41 +46,59 @@ object Pokemons extends App{
   usCoordinates.persist(StorageLevel.MEMORY_AND_DISK)
   //println(usCoordinates.count)
 
-  def json(url: String): JsValue = Json.parse(fromURL(url).mkString)
+  // get json with url link
+  def toJson(url: String): JsValue = Json.parse(fromURL(url).mkString)
+
+  // retrieve zipcodes from json result
+  def getZipCodes(data: Array[Coordinate], key: String, pattern: Regex) = for {
+    coord <- data
+    url = s"https://maps.googleapis.com/maps/api/geocode/json?latlng=${coord.lat},${coord.lng}&key=${key}"
+    adds = (toJson(url) \ "results" \\ "formatted_address").toList.map(_.as[String])
+    goodPart = for (pattern(_, state_zip, _) <- adds) yield state_zip
+    zip = if (goodPart.isEmpty) "00000" else goodPart(0).split(" ")(1)
+  } yield zip
+
+  val pattern = """(.*)\,\s([A-Z]*\s\d{5})\,\s(USA)""".r
 
   // Due to Google API request limit, need to split the RDD by 2500 as a subset
-  val part1 = usCoordinates take 2500
+  val part1 = usCoordinates take 2500 // Array[Coordinate]
+  val key1 = "AIzaSyDXxUKKAooWrPYxk09yudhZCKVw5zTWYlw"
 
-  // Test on the first record and see what we can get through the reverse geocoding
-  val coord = part1.take(1)
-  val url_1 = s"https://maps.googleapis.com/maps/api/geocode/json?latlng=${coord(0).lat},${coord(0).lng}&key=AIzaSyCdGD2_7T1Bsi9dtp_dhgmL5p4gKTXrmUU"//  val req = url(url_1)
-  val result = json(url_1)
-  println(url_1)
+  val zips_1 = getZipCodes(part1, key1, pattern)
+//  val zips_1_RDD = sc.parallelize(zips_1)
 
-//  val textWrapper = Http(req OK as.String)
-//  val res = Await.result(textWrapper, 10.millisecond)
-//  val text = for (str <- res) str
 
-//  val text = textWrapper onSuccess {
-//    case content => content
-//  }
-
-//  val zip_1 = (result \ "results" \\ "formatted_address")(0).as[String].split(",")(2).split(" ")(2)
-  val adds = (result \ "results" \\ "formatted_address").toList.map(_.as[String])
-  // Regex matching
-  val pattern = """(.*)\,\s([A-Z]*\s\d{5})\,\s(USA)""".r
-  val goodPart = for (pattern(_, state_zip, _) <- adds) yield state_zip
-  val zip = goodPart(0).split(" ")(1)
-  println(zip)
 
 //  val zips_1 = for {
 //    coord <- part1
-//    url = s"https://maps.googleapis.com/maps/api/geocode/json?latlng=${coord.lat},${coord.lng}&key=AIzaSyD2LzhM2EP71gtwaoL0tbyeeHbX80x0TAU"
-//    res = json(url)
-//    adds = res \ "results" \\ "formatted_address"
-//    for
+//    url = s"https://maps.googleapis.com/maps/api/geocode/json?latlng=${coord.lat},${coord.lng}&key=${key1}"
+//    adds = (toJson(url) \ "results" \\ "formatted_address").toList.map(_.as[String])
+//    goodPart = for (pattern(_, state_zip, _) <- adds) yield state_zip
+//    zip = if (goodPart.isEmpty) "00000" else goodPart(0).split(" ")(1)
 //  } yield zip
 //
 //  println(zips_1.size)
 //  for (zip <- zips_1) println(zip)
+
+  // Test on the first record and see what we can get through the reverse geocoding
+  //  val coord = part1.take(1)
+  //  val url_1 = s"https://maps.googleapis.com/maps/api/geocode/json?latlng=${coord(0).lat},${coord(0).lng}&key=AIzaSyCdGD2_7T1Bsi9dtp_dhgmL5p4gKTXrmUU"//  val req = url(url_1)
+  //  val result = json(url_1)
+  //  println(url_1)
+
+  //  val textWrapper = Http(req OK as.String)
+  //  val res = Await.result(textWrapper, 10.millisecond)
+  //  val text = for (str <- res) str
+
+  //  val text = textWrapper onSuccess {
+  //    case content => content
+  //  }
+
+  //  val zip_1 = (result \ "results" \\ "formatted_address")(0).as[String].split(",")(2).split(" ")(2)
+  //  val adds = (result \ "results" \\ "formatted_address").toList.map(_.as[String])
+  //  // Regex matching
+  //  val pattern = """(.*)\,\s([A-Z]*\s\d{5})\,\s(USA)""".r
+  //  val goodPart = for (pattern(_, state_zip, _) <- adds) yield state_zip
+  //  val zip = goodPart(0).split(" ")(1)
+  //  println(zip)
 }
