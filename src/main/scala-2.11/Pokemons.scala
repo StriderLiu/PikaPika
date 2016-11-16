@@ -64,7 +64,6 @@ object Pokemons extends App{
 //    case content => content
 //  }
 
-//  println(result)
 //  val zip_1 = (result \ "results" \\ "formatted_address")(0).as[String].split(",")(2).split(" ")(2)
   val adds = (result \ "results" \\ "formatted_address").toList.map(_.as[String])
   // Regex matching
