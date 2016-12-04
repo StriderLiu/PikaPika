@@ -40,8 +40,13 @@ Weather API
      (6) Normalization
      
 2. Logistic Regression
+
      (1) With 151 poke monster, the highest accuracy we got is 22%
+     
      (2) With 3 rarities(common, rare and very rare), accuracy is 91%
+     
      (3) With 15 types, accuracy is 48%
+     
 3. Dimension reduction
+     
      PCA 
