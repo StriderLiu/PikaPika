@@ -21,13 +21,11 @@ object GeoCoding extends App{
 
 //  val url=s"https://maps.googleapis.com/maps/api/geocode/json?address=Queensberry+St,+Boston,+MA+02215&key=${key}"
 
-//  println(url)
   def getCoordianate(address: String,key:String)={
     val url=s"https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}"
     val coord=((toJson(url)\"results" )(0)\"geometry" \ "location")
     Coordinate((coord \ "lat").as[Double],(coord \ "lng").as[Double])
   }
-
 
 
 //  val jsValue=toJson(url)

@@ -15,7 +15,7 @@ object WeatherCrawler extends App{
   case class Coordinate(lat: Double, lng: Double)
 
   val timeStamp = Calendar.getInstance.getTime
-//  println(timeStamp)
+
 //  val lat=53.602550
 //  val long= -113.444897
   val key="230d97a0808f8c0bb2c722ea6e9ba251"
