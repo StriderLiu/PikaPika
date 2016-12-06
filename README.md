@@ -13,6 +13,9 @@ http://prezi.com/4bapseyrrq5c/?utm_campaign=share&utm_medium=copy&rc=ex0share
 
 # Data Source
 Predict'em All from Kaggle: https://www.kaggle.com/semioniy/predictemall
+PokemonGO from Kaggle: https://www.kaggle.com/abcsds/pokemongo
+Google Map API for geocoding
+Weather API
 
 # Platform
 
@@ -22,18 +25,28 @@ Predict'em All from Kaggle: https://www.kaggle.com/semioniy/predictemall
 
 # Next Step
 
-1. [Done]Filter data of U.S. cities: New_York, Los_Angeles, Chicago, Phoenix, Denver, Indianapolis, Detroit, Boise, Louisville, Monrovia
-
-2. [Processing]Request zip code using Google Map reverse geoencoding api ((latitude, longitude) -> ZIP)
-
-     (1)Need about 48 google keys.
+1. Data Cleansing
      
-     (2)Store every 2500 zip codes in a file, then merge them into one .
+     (1) Drop these columns: pokemonId, appearedLocalTime, X_id, cellId_90m, cellId_180m, cellId_370m, cellId_730m, cellId_1460m, cellId_2920m, cellId_5850m, appearedDayOfWeek, appearedMonth, appearedYear, weatherIcon
+     
+     (2) Replace all "TURE" and "FALSE" with "1" and "0"
+     
+     (3) Represent appearedTimeOfDay, city, continent and weather as their corresponding number (start from 1)
+     
+     (4) Merge data from PokemonGO, add rarity and type data
+     
+     (5) Abstract US data
+     
+     (6) Normalization
+     
+2. Logistic Regression
 
-3. Add Zip as output feature and remove coordinates columns (use SparkSQL)
-
-4. Feature Adjustments (Generate a cleansing-complete csv file)
-
-5. Logistic Regression
-
-6. Dimension reduction
+     (1) With 151 poke monster, the highest accuracy we got is 22%
+     
+     (2) With 3 rarities(common, rare and very rare), accuracy is 91%
+     
+     (3) With 15 types, accuracy is 48%
+     
+3. Dimension reduction
+     
+     PCA 
