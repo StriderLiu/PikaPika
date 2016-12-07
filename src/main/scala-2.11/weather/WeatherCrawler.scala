@@ -17,15 +17,20 @@ object WeatherCrawler extends App{
 
   val timeStamp = Calendar.getInstance.getTime
 
-  println(timeStamp.getDay)
-
 //    ['afternoon','evening','morning', 'night']==>[1,2,3,4]
-  def appearedTimeOfDay = timeStamp.getTime
-  def appearedHour = timeStamp.getHours
-  def appearedMinute = timeStamp.getMinutes
-  def appearedDayOfWeek =timeStamp.getDay
-  def appearedDay = timeStamp.getDate
+//  def appearedTimeOfDay = timeStamp.getTime
+  def AppearedHour = timeStamp.getHours
+  def AppearedMinute = timeStamp.getMinutes
+  def AppearedDayOfWeek =timeStamp.getDay
+  def AppearedDay = timeStamp.getDate
+  def AppearedTimeOfDay = AppearedHour match {
+    case x if x >= 0 && x < 6 => 4
+    case x if x >= 6 && x < 12 =>3
+    case x if x >=12 && x < 18 =>1
+    case x if x >= 18 => 2
+  }
 
+//  println(appearedDayOfWeek)
 
 //  val lat=53.602550
 //  val long= -113.444897
