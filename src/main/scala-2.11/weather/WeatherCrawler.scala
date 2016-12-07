@@ -2,6 +2,7 @@ package weather
 
 /**
   * Created by Shuxian on 12/5/16.
+  * Powered by DarkSky
   */
 import geo.Pokemons
 import java.util.Calendar
@@ -18,6 +19,7 @@ object WeatherCrawler extends App{
 
   println(timeStamp.getDay)
 
+//    ['afternoon','evening','morning', 'night']==>[1,2,3,4]
   def appearedTimeOfDay = timeStamp.getTime
   def appearedHour = timeStamp.getHours
   def appearedMinute = timeStamp.getMinutes
@@ -37,8 +39,19 @@ object WeatherCrawler extends App{
     jsValue
   }
 
+//    ['Africa', 'America', 'America/Argentina', 'America/Indiana',
+//  'America/Kentucky', 'Asia', 'Atlantic', 'Australia', 'Europe',
+//  'Indian', 'Pacific']
   def getContinent(jsValue: JsValue):String=(jsValue \ "timezone").as[String].split("/")(0)
 
+//  'Breezy', 'BreezyandMostlyCloudy', 'BreezyandOvercast',
+//  'BreezyandPartlyCloudy', 'Clear', 'DangerouslyWindy', 'Drizzle',
+//  'DrizzleandBreezy', 'Dry', 'DryandMostlyCloudy',
+//  'DryandPartlyCloudy', 'Foggy', 'HeavyRain', 'Humid',
+//  'HumidandOvercast', 'HumidandPartlyCloudy', 'LightRain',
+//  'LightRainandBreezy', 'MostlyCloudy', 'Overcast', 'PartlyCloudy',
+//  'Rain', 'RainandWindy', 'Windy', 'WindyandFoggy',
+//  'WindyandPartlyCloudy']
   def getIcon(jsValue: JsValue):String=(jsValue \ "currently" \ "summary").as[String].replace(" ","")
 
   def getPressure(jsValue: JsValue):Double=(jsValue \ "currently" \ "pressure").as[Double]
@@ -83,13 +96,4 @@ object WeatherCrawler extends App{
 //  val sunsetMinutesMidnight = sunsetHour * 60 + sunsetMinute
 
 
-  //  'sunriseMinutesMidnight',
-
-//  'sunriseMinutesSince',
-//  'sunsetMinutesMidnight',
-
-//  'sunsetMinutesBefore',
-//  val time= new Date(sunriseTime * 1000)
-
-//  println(sunriseHour)
 }

@@ -1,0 +1,79 @@
+ latitude,                      get from google geocoding
+ longitude,
+
+ appearedTimeOfDay,             use current system time
+ appearedHour,
+ appearedMinute,
+ appearedDayOfWeek,
+ appearedDay,
+
+ terrainType,
+ closeToWater,
+
+ city,                           user input / get from google geocoding
+                                 'Adelaide', 'Amman', 'Amsterdam', 'Athens', 'Auckland', 'Bahia',
+                                 'Bangkok', 'Belem', 'Berlin', 'Bogota', 'Boise', 'Bratislava',
+                                 'Brisbane', 'Brunei', 'Brussels', 'Bucharest', 'Buenos_Aires',
+                                 'Cairo', 'Casablanca', 'Chicago', 'Copenhagen', 'Cordoba',
+                                 'Costa_Rica', 'Damascus', 'Denver', 'Detroit', 'Dubai', 'Dublin',
+                                 'Edmonton', 'Fortaleza', 'Guam', 'Guayaquil', 'Guyana', 'Halifax',
+                                 'Helsinki', 'Ho_Chi_Minh', 'Hobart', 'Hong_Kong', 'Honolulu',
+                                 'Indianapolis', 'Isle_of_Man', 'Istanbul', 'Jakarta', 'Jerusalem',
+                                 'Karachi', 'Kiev', 'Kolkata', 'Kuala_Lumpur', 'Kuching', 'Lisbon',
+                                 'Ljubljana', 'London', 'Los_Angeles', 'Louisville', 'Luanda',
+                                 'Luxembourg', 'Madrid', 'Manila', 'Melbourne', 'Mexico_City',
+                                 'Monrovia', 'Monterrey', 'Montreal', 'Moscow', 'Nairobi',
+                                 'New_York', 'Nicosia', 'Noumea', 'Oslo', 'Paris', 'Perth',
+                                 'Phnom_Penh', 'Phoenix', 'Prague', 'Puerto_Rico', 'Regina',
+                                 'Reunion', 'Reykjavik', 'Rome', 'Santiago', 'Sao_Paulo', 'Sarajevo',
+                                 'Singapore', 'Stockholm', 'Sydney', 'Tahiti', 'Taipei', 'Tokyo',
+                                 'Toronto', 'Tripoli', 'Tunis', 'Vancouver', 'Vienna', 'Vilnius',
+                                 'Warsaw', 'Winnipeg', 'Zagreb', 'Zurich'
+
+
+ continent,                      get from weather API
+                                 'frica', 'America', 'America/Argentina', 'America/Indiana',
+                                 'America/Kentucky', 'Asia', 'Atlantic', 'Australia', 'Europe',
+                                 'Indian', 'Pacific'
+ weather,                        'Breezy', 'BreezyandMostlyCloudy', 'BreezyandOvercast',
+                                 'BreezyandPartlyCloudy', 'Clear', 'DangerouslyWindy', 'Drizzle',
+                                 'DrizzleandBreezy', 'Dry', 'DryandMostlyCloudy',
+                                 'DryandPartlyCloudy', 'Foggy', 'HeavyRain', 'Humid',
+                                 'HumidandOvercast', 'HumidandPartlyCloudy', 'LightRain',
+                                 'LightRainandBreezy', 'MostlyCloudy', 'Overcast', 'PartlyCloudy',
+                                 'Rain', 'RainandWindy', 'Windy', 'WindyandFoggy',
+                                 'WindyandPartlyCloudy']
+ temperature,
+ windSpeed,
+ windBearing,
+ pressure,
+ sunriseMinutesMidnight,
+ sunriseHour,
+ sunriseMinute,
+ sunriseMinutesSince,            not find
+ sunsetMinutesMidnight,
+ sunsetHour,
+ sunsetMinute,
+ sunsetMinutesBefore,            not find
+
+ population_density,             datasciencetoolkits
+ urban,
+ suburban,
+ midurban,
+ rural,
+
+ gymDistanceKm,                 not able to find closed gym distance
+ gymIn100m,
+ gymIn250m,
+ gymIn500m,
+ gymIn1000m,
+ gymIn2500m,
+ gymIn5000m,
+
+ pokestopDistanceKm,            not find source
+ pokestopIn100m,
+ pokestopIn250m,
+ pokestopIn500m,
+ pokestopIn1000m,
+ pokestopIn2500m,
+ pokestopIn5000m,
