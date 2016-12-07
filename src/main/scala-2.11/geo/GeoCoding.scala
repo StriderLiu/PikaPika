@@ -4,16 +4,12 @@ package geo
   * Created by Shuxian on 12/6/16.
   */
 
-//import geo.Pokemons
 import geo.Pokemons.Coordinate
-import weather._
 import play.api.libs.json.{JsValue, Json}
 
 import scala.io.Source.fromURL
 
 object GeoCoding extends App{
-
-//  case class Address(add:String)
 
   def toJson(url: String): JsValue = Json.parse(fromURL(url).mkString)
 
