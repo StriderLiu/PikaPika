@@ -76,9 +76,13 @@ object WeatherCrawler extends App{
 
   def getSunriseMinutesMidnight(sunriseHour:Int, sunriseMinute:Int)=sunriseHour *60 +sunriseMinute
 
+  def getSunriseMinutesMidnight(jsValue: JsValue):Int = getSunriseTime(jsValue).getHours * 60 + getSunriseTime(jsValue).getMinutes
+
   def getSunsetMinutesMidnight(sunsetHour: Int, sunsetMinute:Int)=sunsetHour * 60 + sunsetMinute
 
-//  val jsValue=Pokemons.toJson(url)
+  def getSunsetMinutesMidnight(jsValue: JsValue)=getSunsetTime(jsValue).getHours * 60 + getSunsetTime(jsValue).getMinutes
+
+  //  val jsValue=Pokemons.toJson(url)
 //  val continent = (jsValue \ "timezone").get.as[String].split("/")(0)
 //  val icon=(jsValue \ "currently" \ "summary").get.as[String].replace(" ","")
 //  val pressure = (jsValue \ "currently" \ "pressure").get.as[Double]
