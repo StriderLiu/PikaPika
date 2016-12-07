@@ -16,6 +16,15 @@ object WeatherCrawler extends App{
 
   val timeStamp = Calendar.getInstance.getTime
 
+  println(timeStamp.getDay)
+
+  def appearedTimeOfDay = timeStamp.getTime
+  def appearedHour = timeStamp.getHours
+  def appearedMinute = timeStamp.getMinutes
+  def appearedDayOfWeek =timeStamp.getDay
+  def appearedDay = timeStamp.getDate
+
+
 //  val lat=53.602550
 //  val long= -113.444897
   val key="230d97a0808f8c0bb2c722ea6e9ba251"
@@ -44,13 +53,13 @@ object WeatherCrawler extends App{
 
   def getSunsetTime(jsValue: JsValue):Date = new Date(((jsValue \ "daily" \ "data" )(0) \ "sunsetTime").as[Long] * 1000)
 
-  def getSunriseHour(date: Date)=date.getHours
+  def getSunriseHour(jsValue: JsValue)=getSunriseTime(jsValue).getHours
 
-  def getSunriseMinute(date: Date)=date.getMinutes
+  def getSunriseMinute(jsValue: JsValue)=getSunriseTime(jsValue).getMinutes
 
-  def getSunsetHour(date:Date) =date.getHours
+  def getSunsetHour(jsValue: JsValue)=getSunsetTime(jsValue).getHours
 
-  def getSunsetMinute(date:Date) = date.getMinutes
+  def getSunsetMinute(jsValue: JsValue)=getSunsetTime(jsValue).getMinutes
 
   def getSunriseMinutesMidnight(sunriseHour:Int, sunriseMinute:Int)=sunriseHour *60 +sunriseMinute
 
