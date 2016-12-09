@@ -1,4 +1,8 @@
 # PikaPika
+Please visite our new repository at:
+
+https://github.com/StriderLiu/PokemonGo
+
 Pokemon Go Analysis-Poke Monsters Spawn Prediction
 
 Big Data Systems Engineer using Scala
